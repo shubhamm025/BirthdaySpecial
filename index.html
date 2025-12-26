@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday My Love 💕</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;500&family=Sacramento&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;500&family=Sacramento&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-pink: #ffb7c5;
@@ -17,10 +15,10 @@
             --body-font: 'Poppins', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
 
         body {
@@ -30,35 +28,50 @@
             color: var(--text-color);
         }
 
-        /* FLOATING HEARTS */
+        /* ===== FLOATING HEARTS ANIMATION ===== */
         .hearts-container {
             position: fixed;
-            inset: 0;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;
         }
 
         .heart {
             position: absolute;
             bottom: -10px;
+            color: var(--deep-red);
             animation: floatUp 6s linear infinite;
             opacity: 0.7;
         }
 
         @keyframes floatUp {
-            from { transform: translateY(0); opacity: 0; }
-            to { transform: translateY(-100vh); opacity: 1; }
+            0% { 
+                transform: translateY(0) scale(0.5); 
+                opacity: 0; 
+            }
+            20% { 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: translateY(-100vh) scale(1.2); 
+                opacity: 0; 
+            }
         }
 
-        /* LANDING PAGE */
+        /* ===== PAGE 1: LANDING PAGE ===== */
         #landing-page {
             height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             text-align: center;
             position: relative;
             z-index: 10;
+            transition: opacity 0.8s ease;
         }
 
         #landing-page.hidden {
@@ -66,52 +79,106 @@
             pointer-events: none;
         }
 
+        .content-wrapper {
+            z-index: 10;
+        }
+
         .main-title {
             font-family: var(--handwriting-font);
             font-size: 3rem;
             color: var(--deep-red);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .countdown-box {
-            margin-top: 20px;
             font-family: 'Sacramento', cursive;
             font-size: 2.5rem;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255, 255, 255, 0.6);
             padding: 20px 30px;
             border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(214, 51, 108, 0.2);
+            display: inline-block;
+            color: var(--deep-red);
+            min-width: 300px;
+        }
+
+        .wait-text {
+            margin-top: 20px;
+            font-family: var(--handwriting-font);
+            font-size: 1.3rem;
             color: var(--deep-red);
         }
 
-        /* MODALS */
+        /* ===== MODALS ===== */
         .modal {
             display: none;
             position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            left: 0; 
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            animation: fadeIn 0.5s;
         }
 
         .modal.active {
             display: flex;
         }
 
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+
         .modal-content {
             background: white;
-            padding: 40px;
+            padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            max-width: 400px;
             width: 90%;
+            max-width: 400px;
+            border: 2px solid var(--primary-pink);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: scaleIn 0.5s ease;
+            position: relative;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content h2 {
+            font-family: var(--handwriting-font);
+            font-size: 2rem;
+            color: var(--deep-red);
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
         }
 
         input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             margin: 15px 0;
-            border-radius: 10px;
             border: 2px solid var(--primary-pink);
+            border-radius: 10px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--deep-red);
         }
 
         button {
@@ -120,80 +187,352 @@
             border: none;
             padding: 12px 30px;
             border-radius: 25px;
+            font-size: 1.1rem;
             font-family: var(--handwriting-font);
             cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(214, 51, 108, 0.3);
         }
 
-        /* MAIN PAGE */
+        button:hover { 
+            transform: scale(1.05); 
+        }
+
+        .hidden { 
+            display: none !important; 
+        }
+
+        #error-message {
+            color: var(--deep-red);
+            font-size: 0.95rem;
+            margin-top: 15px;
+        }
+
+        #error-message.shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* ===== PAGE 2: MAIN SURPRISE PAGE ===== */
         #main-page {
             position: fixed;
-            inset: 0;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            min-height: 100vh;
             background: var(--soft-white);
             overflow-y: auto;
             z-index: 20;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease-in-out;
         }
 
-        #main-page.visible {
+        #main-page.visible { 
             opacity: 1;
             pointer-events: auto;
         }
 
+        /* Background Photos */
+        .bg-photos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bg-photos .bg-img {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0.75;
+            border-radius: 10px;
+            object-fit: cover;
+            filter: blur(1px);
+        }
+
+        .bg-img.pos-1 { 
+            top: 10%; 
+            left: 5%; 
+            transform: rotate(15deg); 
+        }
+        
+        .bg-img.pos-2 { 
+            top: 20%; 
+            right: 10%; 
+            transform: rotate(-10deg); 
+        }
+        
+        .bg-img.pos-3 { 
+            bottom: 20%; 
+            left: 10%; 
+            transform: rotate(5deg); 
+        }
+        
+        .bg-img.pos-4 { 
+            bottom: 10%; 
+            right: 5%; 
+            transform: rotate(-5deg); 
+        }
+
+        .bg-img.pos-5 {
+            top: 45%;
+            left: 10%;
+            transform: translate(-50%, -50%) rotate(8deg);
+        }
+
+        .bg-img.pos-6 {
+            top: 45%;
+            right: 5%;
+            transform: rotate(10deg);
+        }
+
+        /* Banner */
         .banner {
             position: sticky;
             top: 0;
-            background: linear-gradient(135deg, var(--deep-red), #ff4d6d);
+            background: linear-gradient(135deg, var(--deep-red) 0%, #ff4d6d 100%);
             color: white;
             text-align: center;
             padding: 20px;
-            z-index: 50;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
         .banner h1 {
             font-family: var(--handwriting-font);
             font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite;
         }
 
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        }
+
+        /* Notebook Container */
         .notebook-container {
             display: flex;
             justify-content: center;
             padding: 40px 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
         }
 
         .notebook {
             display: flex;
-            max-width: 900px;
             width: 100%;
+            max-width: 900px;
             background: white;
             border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
             overflow: hidden;
+            min-height: 600px;
         }
 
-        .page {
-            flex: 1;
-            padding: 30px;
+        .page { 
+            flex: 1; 
+            padding: 40px 30px; 
         }
 
+        /* Left Page - Photo */
         .left-page {
-            border-right: 3px dashed #ffb3d9;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe5ef 100%);
             display: flex;
             justify-content: center;
             align-items: center;
+            border-right: 3px dashed #ffb3d9;
         }
 
+        .polaroid {
+            background: white;
+            padding: 15px 15px 50px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: rotate(-3deg);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .polaroid img { 
+            width: 100%; 
+            max-width: 250px;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            background: #ddd;
+        }
+
+        .caption {
+            font-family: var(--handwriting-font);
+            font-size: 1.8rem;
+            color: var(--deep-red);
+            margin-top: 15px;
+        }
+
+        /* Right Page - Letter */
         .right-page {
+            background: linear-gradient(to bottom, #fffbf8 0%, #fff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .paper-content {
+            flex: 1;
+        }
+
+        .paper-content h2 { 
+            font-family: var(--handwriting-font); 
+            color: var(--deep-red);
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         .paper-content p {
             font-family: 'Caveat', cursive;
             font-size: 1.3rem;
             line-height: 1.9;
+            letter-spacing: 0.02em;
+            color: #333;
         }
 
-        /* MOBILE FIX — ONLY CHANGE */
+        /* Wish Button */
+        .wish-btn {
+            align-self: center;
+            margin: 30px auto 0;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--deep-red) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 15px rgba(255,77,109,0.4);
+            animation: bounce 2s ease-in-out infinite;
+            display: block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .wish-btn:hover {
+            animation: none;
+            transform: scale(1.1);
+        }
+
+        /* Wish Modal Styling */
+        .pink-modal {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe5ef 100%);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--deep-red);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close:hover {
+            transform: rotate(90deg);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: var(--handwriting-font);
+            font-size: 1.1rem;
+        }
+
+        #wish-success {
+            color: var(--deep-red);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-family: var(--handwriting-font);
+        }
+
+        /* ===== CELEBRATION CONFETTI ===== */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotateZ(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== MOBILE RESPONSIVENESS ===== */
+        @media (max-width: 768px) {
+            .main-title { 
+                font-size: 2rem; 
+            }
+
+            .countdown-box {
+                font-size: 1.8rem;
+                padding: 15px 20px;
+                min-width: 250px;
+            }
+
+            .banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .notebook { 
+                flex-direction: column; 
+            }
+
+            .left-page { 
+                border-right: none; 
+                border-bottom: 3px dashed #ffb3d9; 
+                padding: 30px 20px; 
+            }
+
+            .right-page {
+                max-height: none;
+            }
+
+            .bg-photos .bg-img { 
+                width: 120px;
+                height: 120px;
+                opacity: 0.1; 
+            }
+
+            .paper-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .paper-content p {
+                font-size: 1.1rem;
+            }
+        }
+
         @media (max-width: 768px) {
             #main-page {
                 position: relative;
@@ -217,71 +556,313 @@
         }
     </style>
 </head>
-
 <body>
 
-<div class="hearts-container"></div>
+    <!-- Floating Hearts Container -->
+    <div class="hearts-container"></div>
 
-<section id="landing-page">
-    <div>
-        <h1 class="main-title">A Special Surprise Awaits...</h1>
-        <div id="countdown" class="countdown-box">Loading...</div>
+    <!-- PAGE 1: LANDING / COUNTDOWN -->
+    <section id="landing-page">
+        <div class="content-wrapper">
+            <h1 class="main-title">A Special Surprise Awaits...</h1>
+            
+            <div id="countdown" class="countdown-box">
+                Loading timer...
+            </div>
+
+            <p class="wait-text">Wait for the magic moment ✨</p>
+        </div>
+    </section>
+
+    <!-- PASSWORD MODAL -->
+    <div id="password-modal" class="modal">
+        <div class="modal-content">
+            <h2>Before you enter... 💖</h2>
+            <p>You Are?</p>
+            <input type="text" id="password-input" placeholder="Your answer...">
+            <button onclick="checkPassword()">Unlock ❤️</button>
+            <p id="error-message" class="hidden">Hmm… not quite 😌<br>Someone very special… royal maybe? 👑</p>
+        </div>
     </div>
-</section>
 
-<div id="password-modal" class="modal">
-    <div class="modal-content">
-        <h2>Before you enter 💖</h2>
-        <input id="password-input" placeholder="Your answer">
-        <button onclick="checkPassword()">Unlock ❤️</button>
-    </div>
-</div>
+    <!-- PAGE 2: MAIN SURPRISE -->
+    <section id="main-page" class="hidden">
+        
+        <!-- Background Photos -->
+         <div class="bg-photos">
+            <!-- Replace with your actual image paths -->
+            <img src="images/1.jpg" width='200' height='200'%3E%3Crect fill='%23ffb3d9' width='200' height='200' x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' class="bg-img pos-1" alt="">
+            <img src="images/4.png" width='200' height='200'%3E%3Crect fill='%23ffb3d9' width='200' height='200'x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' class="bg-img pos-2" alt="">
+            <img src="images/5.png" width='200' height='200'%3E%3Crect fill='%23ffb3d9' width='200' height='200'x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' class="bg-img pos-3" alt="">
+            <img src="images/6.png" width='200' height='200'%3E%3Crect fill='%23ffb3d9' width='200' height='200' x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' class="bg-img pos-4" alt="">
+            <img src="images/2.jpg" width='200' height='200'%3E%3Crect fill='%23ffb3d9' width='200' height='200' x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' class="bg-img pos-6" alt="">
+            <img src="images/7.png" width='200' height='200'%3E%3Crect fill='%23ffb3d9' width='200' height='200' x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' class="bg-img pos-5" alt="">        
+        </div>
 
-<section id="main-page">
-    <div class="banner">
-        <h1>💕 Happy Birthday Rajkumari 💕</h1>
-    </div>
+        <!-- Banner -->
+        <div class="banner">
+            <h1>💕 Happy Birthday Rajkumari 💕</h1>
+        </div>
 
-    <div class="notebook-container">
-        <div class="notebook">
-            <div class="page left-page">❤️</div>
-            <div class="page right-page">
-                <div class="paper-content">
-                    <p>Your beautiful message stays EXACTLY the same 💖</p>
+        <!-- Notebook -->
+         <div class="notebook-container">
+            <div class="notebook">
+                <!-- Left Page: Photo -->
+                <div class="page left-page">
+                    <div class="polaroid">
+                        <img src="images/3.jpg" width='250' height='250'%3E%3Crect fill='%23ffb3d9' width='250' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-family='Arial' font-size='20'" alt="Us Together">
+                        <p class="caption">❤️</p>
+                    </div>
+                </div>
+                <!-- Right Page: Love Letter -->
+                <div class="page right-page">
+                    <div class="paper-content">
+                        <h2>Rajkumari,</h2>
+                        <p>
+                            A Very Happy Birthday! 🎉<br><br>
+                            I know humare beech kuch time se sab kuch perfect nahi raha,
+                            par ek baat hamesha sach rahegi tum mere liye hamesha special ho.
+
+                            Humne phir se ek dusre ko choose kiya hai,
+                            aur yeh choice mere liye sirf ek decision nahi
+                            yeh meri umeed hai, aur mera sab kuch.
+
+                            Yeh sirf pyaar nahi hai…
+                            yeh woh darr hai jo tumhe kho dene ke khayal se bhi dil ko tod deta hai,
+                            aur yeh woh sukoon hai
+                            jo sirf tumhari awaaz aur tumhari presence se milta hai.
+
+                            Main jaanta hoon sab perfect nahi hoga,
+                            raaste mein mushkilein aayengi, galtiyan bhi hongi,
+                            par phir bhi main chahta hoon
+                            tum har baar srif mujhe chuno jaise main har baar tumhe choose karta hoon. ❤️
+
+                            I want to grow old with you and live each and every moment with my rajkumari,
+                            full of love and laughter. 💕
+
+                            In this new chapter of your life,
+                            I pray to Mahadev and Sai Baba
+                            to give all the happiness in the world to my rajkumari. 🙏
+
+                            And bas ek chhoti si wish meri bhi hai…
+                            I want that chari, selfish Bhayani back,
+                            jo bina tension ke mere saath meri
+                            dost, lover aur wife ki tarah rehti hai.
+                            <br>Love you three thousand times rajkumari ❤️</br>
+                            
+
+                        </p>
+                    </div>
+                    
+                    <button class="wish-btn" onclick="openWishModal()">🎁 Make a Wish</button>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- WISH MODAL -->
+    <div id="wish-modal" class="modal">
+        <div class="modal-content pink-modal">
+            <span class="close" onclick="closeWishModal()">&times;</span>
+            <h2>Close your eyes & make a wish ✨</h2>
+            
+            <form id="wish-form">
+                <textarea id="wish-textarea" name="message" placeholder="Type your wish here..." required></textarea>
+                <button type="button" onclick="sendWishAutomatically()">💖 Send My Wish</button>
+            </form>
+            <p id="wish-success" class="hidden">Your wish is safe with me 💕</p>
+        </div>
     </div>
-</section>
 
-<script>
-const TARGET_DATE = new Date("December 26, 2025 12:00:00").getTime();
-const PASSWORD = "rajkumari";
+    <script>
+     // ===== CONFIGURATION =====
+        const TARGET_DATE = new Date("December 26, 2025 12:48:00").getTime();
+        const PASSWORD = "rajkumari";
 
-const timer = setInterval(() => {
-    const d = TARGET_DATE - Date.now();
-    if (d <= 0) {
-        clearInterval(timer);
-        document.getElementById("countdown").innerText = "It's Time 💖";
-        document.getElementById("password-modal").classList.add("active");
-        return;
-    }
-    const days = Math.floor(d / 86400000);
-    const hrs = Math.floor(d % 86400000 / 3600000);
-    const min = Math.floor(d % 3600000 / 60000);
-    const sec = Math.floor(d % 60000 / 1000);
-    document.getElementById("countdown").innerText =
-        `${days}d : ${hrs}h : ${min}m : ${sec}s`;
-}, 1000);
+        // ===== FLOATING HEARTS =====
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            document.querySelector(".hearts-container").appendChild(heart);
 
-function checkPassword() {
-    if (passwordInput.value.trim().toLowerCase() === PASSWORD) {
-        document.getElementById("password-modal").classList.remove("active");
-        document.getElementById("landing-page").classList.add("hidden");
-        document.getElementById("main-page").classList.add("visible");
-    }
-}
-</script>
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 300);
+
+        // ===== COUNTDOWN TIMER =====
+        let countdownEnded = false;
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = TARGET_DATE - now;
+
+            // ⏰ Countdown finished
+            if (distance <= 0) {
+                if (!countdownEnded) {
+                    countdownEnded = true;
+                    clearInterval(timerInterval);
+
+                    document.getElementById("countdown").innerHTML = "It's Time! 💖";
+
+                    setTimeout(() => {
+                        document
+                            .getElementById("password-modal")
+                            .classList.add("active");
+                    }, 1000);
+                }
+                return;
+            }
+
+            // ⏳ Countdown running
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const seconds = Math.floor(
+                (distance % (1000 * 60)) / 1000
+            );
+
+            document.getElementById("countdown").innerHTML =
+                `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+
+            }, 1000);
+        // ===== PASSWORD CHECK =====
+        function checkPassword() {
+            const input = document.getElementById("password-input").value.toLowerCase().trim();
+            const errorMsg = document.getElementById("error-message");
+
+            if (input === PASSWORD) {
+                document.getElementById("password-modal").classList.remove("active");
+                document.getElementById("landing-page").classList.add("hidden");
+                
+                const mainPage = document.getElementById("main-page");
+                mainPage.classList.remove("hidden");
+                setTimeout(() => mainPage.classList.add("visible"), 50);
+            } else {
+                errorMsg.classList.remove("hidden");
+                errorMsg.classList.add("shake");
+                setTimeout(() => errorMsg.classList.remove("shake"), 500);
+            }
+        }
+
+        // Allow Enter key to submit password
+        document.getElementById("password-input").addEventListener("keypress", function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // ===== WISH MODAL =====
+        function openWishModal() {
+            document.getElementById("wish-modal").classList.add("active");
+        }
+
+        function closeWishModal() {
+            document.getElementById("wish-modal").classList.remove("active");
+        }
+
+        // ===== SEND WISH AUTOMATICALLY VIA EMAIL =====
+        function sendWishAutomatically() {
+            const wishText = document.getElementById("wish-textarea").value.trim();
+            
+            if (!wishText) {
+                alert('Please write your wish first! 💕');
+                return;
+            }
+
+            // Close the wish modal
+            document.getElementById("wish-modal").classList.remove("active");
+            
+            // Show celebration effect
+            createCelebration();
+
+            // Send email using EmailJS or Formspree
+            // Using Formspree as a simple solution
+            fetch('https://formspree.io/f/xlgeejnk', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: 'shubhammotwani2511@gmail.com',
+                    subject: '🎂 Birthday Wish from Rajkumari 💕',
+                    message: `Birthday Wish:\n\n${wishText}\n\n----\nSent with love on ${new Date().toLocaleString()}`
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Wish sent successfully!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // ===== CELEBRATION CONFETTI EFFECT =====
+        function createCelebration() {
+            const colors = ['#ff4d6d', '#ffb3d9', '#ffc0cb', '#d6336c', '#ffb7c5', '#ffd700'];
+            const confettiCount = 100;
+            
+            // Create confetti from left bottom
+            for (let i = 0; i < confettiCount / 2; i++) {
+                createConfetti('left', colors);
+            }
+            
+            // Create confetti from right bottom
+            for (let i = 0; i < confettiCount / 2; i++) {
+                createConfetti('right', colors);
+            }
+        }
+
+        function createConfetti(side, colors) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+            
+            if (side === 'left') {
+                confetti.style.left = Math.random() * 20 + '%';
+            } else {
+                confetti.style.right = Math.random() * 20 + '%';
+            }
+            
+            confetti.style.bottom = '0';
+            confetti.style.animation = `confetti-fall ${Math.random() * 2 + 2}s ease-out forwards`;
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 4000);
+        }
+
+        // ===== HANDLE FORM SUBMISSION (FALLBACK - NOT USED) =====
+        var form = document.getElementById("wish-form");
+        form.addEventListener("submit", function(ev) {
+            ev.preventDefault();
+            var data = new FormData(form);
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    form.style.display = "none";
+                    document.getElementById("wish-success").classList.remove("hidden");
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('There was a problem sending your wish. Please try again!');
+            });
+        });
+    </script>
 
 </body>
 </html>
